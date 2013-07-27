@@ -3,16 +3,16 @@ apifreebox
 
 An API to control Freebox Revolution
 
-https://github.com/DjMomo/apifreebox
+https://github.com/DjMomo/ClassePhpFreebox
 
 ==========
 
-2013-05-23 - V1.0 - Initial version
+2013-07-27 - V1.0 - Initial version
 
 ==========
 Configuration :
 
-Insert your freebox password into mafreebox.cfg file
+None
 
 ==========
 How to use :
@@ -21,16 +21,13 @@ Extract all informations about Server into XML format :
 > http://IP/freebox.php
 
 Switch Wifi AP OFF :
-> http://IP/freebox.php?do=wifi_off
+> http://IP/freebox.php?do=wifi&val=off
 
 Switch Wifi AP ON :
-> http://IP/freebox.php?do=wifi_on
+> http://IP/freebox.php?do=wifi&val=on
 
 Reboot box :
 > http://IP/freebox.php?do=reboot
 
-Reboot box after XX seconds :
-> http://IP/freebox.php?do=reboot&val=XX
-
-Change LCD luminosity to XX% :
-> http://IP/freebox.php?do=lcd&val=XX
+Change LCD brightness to XX% :
+> http://IP/freebox.php?do=lcd_brightness&val=XX
