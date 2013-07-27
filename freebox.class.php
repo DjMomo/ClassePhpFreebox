@@ -349,7 +349,25 @@ class apifreebox
 		}
 		return sha1($opad.sha1($ipad.$data, true));
 	}
+	
+	public function GetListClasses()
+	{
+		$dirname = './API/';
+		$dir = opendir($dirname); 
+
+		while($file = readdir($dir)) 
+		{
+			if($file != '.' && $file != '..' && !is_dir($dirname.$file) )
+			{
+				$classe = substr($file,0,strlen($file) - 4);
+				$array[] = $classe;	
+			}
+		}
+		closedir($dir);
+		return $array;
+	}
 }
+
 
 /**
 * Inclut la classe à partir d'un fichier

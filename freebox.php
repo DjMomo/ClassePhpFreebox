@@ -106,8 +106,8 @@ if (isset($do))
 /* Retourne tous les paramètres de la freebox dans un XML */
 else
 {
-	$array_classes = array('Calls_Contacts','Configuration','Extra','ParentalFilter','System');
-
+	$array_classes = $freebox->GetListClasses();
+	
 	// Création fichier XML avec les données
 	// Instance de la class DomDocument
 	$doc = new DOMDocument();
@@ -187,6 +187,5 @@ function DomArrayToXml($array, $dom_doc, $node)
 		$node->appendChild($element);
 	}
 }
-
 
 ?>
