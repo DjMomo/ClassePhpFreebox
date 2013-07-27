@@ -1,7 +1,7 @@
 apifreebox
 ==========
 
-Une classe PHP pour controler sas Freebox Révolution sous Freebox OS
+Une classe PHP pour contrôler sa Freebox Révolution -Server- sous Freebox OS
 
 https://github.com/DjMomo/ClassePhpFreebox
 
