@@ -15,7 +15,7 @@ Configuration :
 Aucune
 
 ==========
-How to use :
+Quelques exemples d'utilisation :
 
 Extraire toutes les iformations de la Freebox Server sous un format XML :
 > http://IP/freebox.php
