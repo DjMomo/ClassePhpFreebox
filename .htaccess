@@ -1,0 +1,6 @@
+Order Deny,Allow
+Deny from all
+# Pour autoriser toutes les machines du réseau 192.168.0.0 (par exemple)
+Allow from 192.168.0.0/255.255.255.0
+# Pour autoriser uniquement la box domotique avec l'IP 192.168.0.16 (par exemple)
+Allow from 192.168.0.16/255.255.255.255
