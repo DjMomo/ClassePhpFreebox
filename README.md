@@ -1,33 +1,33 @@
 apifreebox
 ==========
 
-An API to control Freebox Revolution
+Une classe PHP pour controler sas Freebox Révolution sous Freebox OS
 
 https://github.com/DjMomo/ClassePhpFreebox
 
 ==========
 
-2013-07-27 - V1.0 - Initial version
+2013-07-27 - V1.0 - Version initiale
 
 ==========
 Configuration :
 
-None
+Aucune
 
 ==========
 How to use :
 
-Extract all informations about Server into XML format :
+Extraire toutes les iformations de la Freebox Server sous un format XML :
 > http://IP/freebox.php
 
-Switch Wifi AP OFF :
+Arrêter le point d'accès Wifi :
 > http://IP/freebox.php?do=wifi&val=off
 
-Switch Wifi AP ON :
+Allumer le point d'accès WIfi :
 > http://IP/freebox.php?do=wifi&val=on
 
-Reboot box :
+Rebooter la box :
 > http://IP/freebox.php?do=reboot
 
-Change LCD brightness to XX% :
+Changer la luminosité du LCD à XX% :
 > http://IP/freebox.php?do=lcd_brightness&val=XX
