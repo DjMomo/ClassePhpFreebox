@@ -4,7 +4,7 @@
 * API Parental Filter - Freebox OS
 * http://dev.freebox.fr/sdk/os/#parental-filter
 *
-* http://www.github.com/DjMomo/apifreebox
+* http://www.github.com/DjMomo/ClassePhpFreebox
 ********/
 
 class ParentalFilter

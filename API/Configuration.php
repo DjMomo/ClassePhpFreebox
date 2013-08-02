@@ -4,7 +4,7 @@
 * API Configuration - Freebox OS
 * http://dev.freebox.fr/sdk/os/#configuration
 *
-* http://www.github.com/DjMomo/apifreebox
+* http://www.github.com/DjMomo/ClassePhpFreebox
 ********/
 
 class Configuration 
@@ -81,8 +81,15 @@ class Configuration
 	public function GetConnnectionDDNSConfiguration($provider)
 	{
 		// http://dev.freebox.fr/sdk/os/connection/#get-the-config-of-a-dyndns-service
-		$appURL = "connection/ddns/dyndns/status/".$provider."/";
+		$appURL = "connection/ddns/".$provider."/";
 		return $this->GetDatas($appURL);
+	}
+	
+	public function UpdateConnnectionDDNSConfiguration($provider)
+	{
+		// http://dev.freebox.fr/sdk/os/connection/#set-the-config-of-a-dyndns-service
+		$appURL = "connection/ddns/".$provider."/";
+		return $this->PutDatas($appURL);
 	}
 	
 	public function GetLANConfig()
@@ -111,6 +118,13 @@ class Configuration
 		// http://dev.freebox.fr/sdk/os/lan/#getting-an-host-information
 		$appURL = "lan/browser/".$interface."/".$hostid."/";
 		return $this->GetDatas($appURL);
+	}
+	
+	public function UpdateLANHostsInformation($interface,$hostid)
+	{
+		// http://dev.freebox.fr/sdk/os/lan/#updating-an-host-information
+		$appURL = "lan/browser/".$interface."/".$hostid."/";
+		return $this->PutDatas($appURL);
 	}
 	
 	public function SendWolPacket($interface,$mac,$password = null)

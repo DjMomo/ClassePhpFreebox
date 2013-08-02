@@ -4,7 +4,7 @@
 * API Calls Contacts - Freebox OS
 * http://dev.freebox.fr/sdk/os/#calls-contacts
 *
-* http://www.github.com/DjMomo/apifreebox
+* http://www.github.com/DjMomo/ClassePhpFreebox
 ********/
 
 class Calls_Contacts

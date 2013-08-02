@@ -3,12 +3,13 @@
 /********
 * API Système - Freebox OS
 *
-* http://www.github.com/DjMomo/apifreebox
+* http://www.github.com/DjMomo/ClassePhpFreebox
 ********/
 
 class System
 {
 	protected $apifreebox;
+	
 	public function __construct($apifreebox)
 	{
 		$this->apifreebox = $apifreebox;
