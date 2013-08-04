@@ -23,17 +23,17 @@ class Calls_Contacts
 	
 	private function PostDatas($appURL, $appParams = null)
 	{
-		$response = $this->apifreebox->setURL($appURL)->post($appParams);
+		return $this->apifreebox->setURL($appURL)->post($appParams);
 	}
 	
 	private function PutDatas($appURL, $appParams = null)
 	{
-		$response = $this->apifreebox->setURL($appURL)->put($appParams);
+		return $this->apifreebox->setURL($appURL)->put($appParams);
 	}
 	
 	private function DeleteDatas($appURL, $appParams = null)
 	{
-		$response = $this->apifreebox->setURL($appURL)->delete($appParams);
+		return $this->apifreebox->setURL($appURL)->delete($appParams);
 	}
 	
 	public function GetCallsList()

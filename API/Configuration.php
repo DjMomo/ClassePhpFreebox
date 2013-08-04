@@ -23,17 +23,17 @@ class Configuration
 	
 	private function PostDatas($appURL, $appParams = null)
 	{
-		$response = $this->apifreebox->setURL($appURL)->post($appParams);
+		return $this->apifreebox->setURL($appURL)->post($appParams);
 	}
 	
 	private function PutDatas($appURL, $appParams = null)
 	{
-		$response = $this->apifreebox->setURL($appURL)->put($appParams);
+		return $this->apifreebox->setURL($appURL)->put($appParams);
 	}
 	
 	private function DeleteDatas($appURL, $appParams = null)
 	{
-		$response = $this->apifreebox->setURL($appURL)->delete($appParams);
+		return $this->apifreebox->setURL($appURL)->delete($appParams);
 	}
 	
 	public function GetConnnectionStatus()
@@ -50,11 +50,25 @@ class Configuration
 		return $this->GetDatas($appURL);
 	}
 	
+	public function UpdateConnnectionConfiguration($array_config)
+	{
+		// http://dev.freebox.fr/sdk/os/connection/#update-the-connection-configuration
+		$appURL = "connection/config/";
+		return $this->PutDatas($appURL,$array_config);
+	}
+	
 	public function GetConnnectionIpv6Configuration()
 	{
 		// http://dev.freebox.fr/sdk/os/connection/#get-the-current-ipv6-connection-configuration
 		$appURL = "connection/ipv6/config/";
 		return $this->GetDatas($appURL);
+	}
+	
+	public function UpdateConnnectionIpv6Configuration($array_config)
+	{
+		// http://dev.freebox.fr/sdk/os/connection/#update-the-ipv6-connection-configuration
+		$appURL = "connection/ipv6/config/";
+		return $this->PutDatas($appURL,$array_config);
 	}
 	
 	public function GetConnnectionxDSLStatus()
@@ -85,11 +99,11 @@ class Configuration
 		return $this->GetDatas($appURL);
 	}
 	
-	public function UpdateConnnectionDDNSConfiguration($provider)
+	public function UpdateConnnectionDDNSConfiguration($provider,$array_config)
 	{
 		// http://dev.freebox.fr/sdk/os/connection/#set-the-config-of-a-dyndns-service
 		$appURL = "connection/ddns/".$provider."/";
-		return $this->PutDatas($appURL);
+		return $this->PutDatas($appURL,$array_config);
 	}
 	
 	public function GetLANConfig()
@@ -236,7 +250,7 @@ class Configuration
 		// Update the FtpConfig
 		// http://dev.freebox.fr/sdk/os/ftp/#get-the-current-ftp-configuration
 		$appURL = "ftp/config/";
-		return $this->PostDatas($appURL,$array_config);
+		return $this->PutDatas($appURL,$array_config);
 	}
 	
 	public function GetDmzConfig()
@@ -252,7 +266,7 @@ class Configuration
 		// Update the DmzConfig
 		// http://dev.freebox.fr/sdk/os/nat/#update-the-current-dmz-configuration
 		$appURL = "fw/dmz/";
-		return $this->PostDatas($appURL,$array_config);
+		return $this->PutDatas($appURL,$array_config);
 	}
 	
 	public function GetListPortForwarding()
