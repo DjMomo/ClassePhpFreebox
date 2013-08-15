@@ -4,7 +4,7 @@
 **												
 ** Exemple de script de gestion de la Freebox Révolution - Boitier Server
 **
-** https://github.com/DjMomo/apifreebox/
+** https://github.com/DjMomo/ClassePhpFreebox
 **
 **************************************************************************************/
 
@@ -103,7 +103,7 @@ if (isset($do))
 }
 
 /********** Lecture **********/
-/* Retourne tous les paramètres de la freebox dans un XML */
+/* Retourne tous les paramètres de la freebox dans un fichier XML */
 else
 {
 	$array_classes = $freebox->GetListClasses();

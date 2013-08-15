@@ -1,7 +1,8 @@
 <?php
 /**
   * API Freebox OS
-  * 
+  * https://github.com/DjMomo/ClassePhpFreebox
+  *
 */
 
 class apifreebox
