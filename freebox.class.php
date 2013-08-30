@@ -426,6 +426,13 @@ class apifreebox
 		return $var;
 	}
 	
+	public function convert_truefalse_to_text($var)
+	{
+		if ($var === true) return "true";
+		if ($var === false) return "false";
+		return $var;
+	}
+	
 	/* Retourne tous les paramètres de la freebox dans un fichier XML */
 	public function config_to_XML()
 	{
@@ -475,6 +482,29 @@ class apifreebox
 		}	
 		$doc->appendChild($racine);
 		return $doc->saveXML();
+	}
+	
+	public function DisplayResult($json,$action = "")
+	{
+		if ($json["success"] == true)
+		{
+			echo "$action OK !";
+			echo "<br />Données supplémentaires retournées par la Freebox : ";
+			$keys = array_keys($json["result"]);  
+			$i = 0;
+			foreach ($json["result"] as $value)
+			{
+				$value = $this->convert_truefalse_to_text(utf8_decode($value));
+				echo "<br />".$keys[$i]."= $value";
+				$i++;
+			}
+		}
+		else
+		{
+			echo "Erreur lors de l'exécution de la commande $action.";
+			echo "<br />Le message d'erreur est le suivant : ".utf8_decode($json["msg"])." (".utf8_decode($json["error_code"]).")";
+		}
+	
 	}
 }
 

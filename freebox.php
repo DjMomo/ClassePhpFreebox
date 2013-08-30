@@ -54,7 +54,7 @@ if (isset($do))
 			else
 				$brightness = 100;
 			$array_config = array('brightness' => $brightness);
-			$configuration->UpdateLcdConfig($array_config);
+			$freebox->DisplayResult($configuration->UpdateLcdConfig($array_config),"lcd_brightness");
 			break;
 		}
 		case "lcd_orientation" :
@@ -70,7 +70,7 @@ if (isset($do))
 			else
 				$orientation = 0;
 			$array_config = array('orientation' => $orientation);
-			$configuration->UpdateLcdConfig($array_config);
+			$freebox->DisplayResult($configuration->UpdateLcdConfig($array_config),"lcd_orieentation");
 			break;
 		}
 		case "reboot" :
@@ -79,7 +79,7 @@ if (isset($do))
 			
 			// Instantation de la classe PHP de la partie System
 			$system = new System($freebox);
-			$system->Reboot();			
+			$freebox->DisplayResult($system->Reboot(),"reboot");			
 			break;
 		}
 
@@ -96,7 +96,7 @@ if (isset($do))
 			else
 				$enabled = false;
 			$array_config = array("ap_params" => array( "enabled" => $enabled));
-			$configuration->UpdateWifiConfig($array_config);
+			$freebox->DisplayResult($configuration->UpdateWifiConfig($array_config),"wifi");
 			break;
 		}
 	}
