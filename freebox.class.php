@@ -425,6 +425,57 @@ class apifreebox
 		if ($var === false) return 0;
 		return $var;
 	}
+	
+	/* Retourne tous les paramètres de la freebox dans un fichier XML */
+	public function config_to_XML()
+	{
+		$array_classes = $this->GetListClasses();
+	
+		// Création fichier XML avec les données
+		// Instance de la class DomDocument
+		$doc = new DOMDocument();
+
+		// Definition de la version et de l'encodage
+		$doc->version = '1.0';
+		$doc->encoding = 'UTF-8';
+		$doc->formatOutput = true;
+
+		// Ajout d'un commentaire a la racine
+		$comment_elt = $doc->createComment(utf8_encode('Données de la Freebox Révolution - Boitier Server'));
+		$doc->appendChild($comment_elt);
+
+		$racine = $doc->createElement('freeboxOS');
+
+		// Ajout la balise 'update' a la racine
+		$version_elt = $doc->createElement('update',date("Y-m-d H:i"));
+		$racine->appendChild($version_elt);
+	
+		foreach ($array_classes as $class_name)
+		{
+			$Classe_Elt = $doc->createElement($class_name);
+				
+			$class_methods = get_class_methods($class_name);
+			$class = new $class_name($this);
+			foreach ($class_methods as $method_name) 
+			{
+				if (substr($method_name,0,3) === "Get")
+				{
+					$r = new ReflectionMethod($class_name, $method_name);
+					$params = $r->getNumberOfParameters();
+					if ($params == 0)
+					{
+						$datas = call_user_func(array($class, $method_name));
+						$Method_Elt = $doc->createElement($method_name);
+						DomArrayToXml($datas["result"], $doc, $Method_Elt);
+						$Classe_Elt->appendChild($Method_Elt);
+					}
+				}
+				$racine->appendChild($Classe_Elt);
+			}
+		}	
+		$doc->appendChild($racine);
+		return $doc->saveXML();
+	}
 }
 
 
@@ -436,4 +487,42 @@ function __autoload($classname)
 {
 	$filename = "./API/". $classname .".php";
 	include_once($filename);
+}
+
+/**
+* Converti (récursivement) un array en XML (via DOM)
+*/
+function DomArrayToXml($array, $dom_doc, $node)
+{
+	$array_special_char = array(true, false, "<", ">", "&", "'", "\"");
+	$array_replace_char = array(1,0,"&lt;",	"&gt;", "&amp;","&apos;", "&quot;");
+	
+	if (is_array($array))
+	{
+		foreach($array as $key => $item)
+		{
+			if (is_numeric($key))
+				$key = "id-".$key;
+		
+			if(is_array($item))
+			{
+				$element = $dom_doc->createElement($key);
+				DomArrayToXml($item, $dom_doc, $element);
+				$node->appendChild($element);
+			}
+			else
+			{
+				//if ($item === true) $item = 1;
+				//if ($item === false) $item = 0;
+				$encoded_item = str_replace ($array_special_char, $array_replace_char,$item);
+				$element = $dom_doc->createElement($key,utf8_encode($encoded_item));	
+				$node->appendChild($element);
+			}	
+		}
+	}
+	else
+	{
+		$element = $dom_doc->createElement("Datas",utf8_encode("Nothing"));	
+		$node->appendChild($element);
+	}
 }
