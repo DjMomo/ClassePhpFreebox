@@ -514,5 +514,13 @@ class Configuration
 		$appURL = "wifi/mac_filter/";
 		return $this->PostDatas($appURL,$array_config);
 	}
+	
+	public function GetPhoneConfig()
+	{
+		// Get phone configuration
+		// without documentation
+		$appURL = "phone/config/";
+		return $this->GetDatas($appURL);
+	}
 }
 ?>
