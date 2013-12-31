@@ -32,6 +32,7 @@ Rebooter la box :
 
 Changer la luminosité du LCD à XX% :
 > http://IP/freebox.php?do=lcd_brightness&val=XX
+
 ==========
 License
 
