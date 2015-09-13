@@ -95,7 +95,7 @@ if (isset($do))
 				$enabled = true;
 			else
 				$enabled = false;
-			$array_config = array("ap_params" => array( "enabled" => $enabled));
+			$array_config = array( "enabled" => $enabled);
 			$freebox->DisplayResult($configuration->UpdateWifiConfig($array_config),"wifi");
 			break;
 		}

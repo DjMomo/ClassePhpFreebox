@@ -7,7 +7,10 @@ https://github.com/DjMomo/ClassePhpFreebox
 
 ==========
 
-2013-07-27 - V1.0 - Version initiale
+2013-07-27 - V1.0 - Version initiale par DjMomo
+2015-09-13 - V1.1 - Corrections par Cédric Lecourt (https://github.com/Dric78/) :
+                    - Utilisation de la methode login une fois un token récupéré et sauvegardé, ce pour permettre un usage distant de l'API
+                    - Correction des appels d'allumage/arrêt du point d'accès Wifi
 
 ==========
 Configuration :
