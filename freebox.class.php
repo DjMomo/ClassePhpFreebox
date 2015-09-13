@@ -88,7 +88,8 @@ class apifreebox
 		if ((!file_exists($TokenFile)) || ($force_refresh == 1))
 		{				
 			$result = $this->setURL($appURL)->post($appParams);
-			
+	
+	
 			$csvdata = array(	
 						$result['result']['app_token'], 
 						$result['result']['track_id']
@@ -158,24 +159,40 @@ class apifreebox
 	public function _NewSession()
 	{
 		$appURL = "login/session/";
-		$response = $this->_GetAuthStatus();
 
-		if (strcmp($response['result']['status'],'granted') != 0)
-		{
-			$this->_RequestAuth();
+		$TokenFile = "token";
+		if (!file_exists($TokenFile)) {
 			$response = $this->_GetAuthStatus();
 
-			while (strcmp($response['result']['status'],'pending') == 0)
-			{
-				sleep(1);
-				echo "<br />Attente d'autorisation pour l'application. Validez l'accès depuis l'afficheur de la Freebox Server.";
-				$response = $this->_GetAuthStatus();
-			}
 			if (strcmp($response['result']['status'],'granted') != 0)
 			{
-				echo "Request access ".$response['result']['status']." !";
-				exit;
+				$this->_RequestAuth();
+				$response = $this->_GetAuthStatus();
+	
+				while (strcmp($response['result']['status'],'pending') == 0)
+				{
+					sleep(1);
+					echo "<br />Attente d'autorisation pour l'application. Validez l'accès depuis l'afficheur de la Freebox Server.";
+					$response = $this->_GetAuthStatus();
+				}
+				if (strcmp($response['result']['status'],'granted') != 0)
+				{
+					echo "Request access ".$response['result']['status']." !";
+					exit;
+				}
 			}
+		} else {
+			$response = $this->_GetLogin();
+
+			$data = file_get_contents($TokenFile);
+			if ( $data !== FALSE) 
+			{
+				$data = explode(',',$data);
+				
+				$this->APP_TOKEN = trim($data[0]);
+				$this->TRACK_ID = trim($data[1]);
+			}
+			
 		}
 		$password = $this->hmac_sha1($this->APP_TOKEN, $response['result']['challenge']);
 
@@ -190,6 +207,16 @@ class apifreebox
 		$this->SESSION_TOKEN = $response['result']['session_token'];
 	}
 	
+	/**
+	* Se connecter lorsqu'un tokena déjà été attribué par la freebox
+	*/
+	public function _GetLogin()
+	{
+		$appURL = "login/";
+		$response = $this->setURL($appURL)->get();
+		return $response;
+	}
+
 	/**
 	* Récupère les droits d'accès
 	*/
@@ -220,7 +247,7 @@ class apifreebox
  
 	public function post ($pPostParams=array(), $pGetParams = array())
 	{
-    	return $this->_InterrogerAPI ($this->URL,'POST',$pPostParams);
+   		return $this->_InterrogerAPI ($this->URL,'POST',$pPostParams);
 	}
     
 	public function put ($pPutParams = array())
