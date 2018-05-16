@@ -1,7 +1,7 @@
 <?php
 
 /********
-* API Système - Freebox OS
+* API SystÃ¨me - Freebox OS
 *
 * http://www.github.com/DjMomo/ClassePhpFreebox
 ********/
@@ -46,7 +46,7 @@ class System
 	{
 		// without documentation
 		$appURL = "system/reboot/";
-		return $this->PostDatas($appURL);
+		return $this->PostDatas($appURL,array());
 	}
 }
 
